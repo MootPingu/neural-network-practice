@@ -1,17 +1,15 @@
+import os
 import urllib.request
 
-print("正在去网上拿数据...")
-url = "https://raw.githubusercontent.com/makeyourownneuralnetwork/makeyourownneuralnetwork/master/mnist_dataset/mnist_test_10.csv"
-response = urllib.request.urlopen(url)
+# 确保 data 文件夹存在
+os.makedirs("data", exist_ok=True)
 
-# 直接把网页上所有的内容一口气读下来（字节形式）
-raw_data = response.read()
+url = "https://pjreddie.com/media/files/mnist_test.csv"
+filepath = "data/mnist_test.csv"
 
-print("拿到了！正在存入本地 data 文件夹...")
-
-# 以“写入（w）”模式打开（或者新建）一个文件，把数据塞进去
-# 注意：前提是你已经在外面手动建好了 data 文件夹！
-with open("data/mnist_test_10.csv", "wb") as f:
-    f.write(raw_data)
-
-print("搞定！现在就算断网，我们也有数据可以训练了！")
+if os.path.exists(filepath):
+    print("✨ 本地已经有这个文件啦，不用重复下载！")
+else:
+    print("⏳ 正在下载 MNIST 数据集（约 17MB），请稍候...")
+    urllib.request.urlretrieve(url, filepath)
+    print("🎉 下载完成！")
