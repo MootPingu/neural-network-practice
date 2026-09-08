@@ -8,7 +8,7 @@ class NeuralNetwork:
         self.inodes = input_nodes   # 输入层：28*28所有像素
         self.hnodes = hidden_nodes  # 隐藏层：
         self.onodes = output_nodes  # 输出层：预测数字0-9
-        self.lr = learning_rate      # 学习率
+        self.lr = learning_rate     # 学习率
 
         # 生成输入层 -> 隐藏层的权重表格 (二维矩阵)
         self.wih = np.random.normal(0.0, pow(self.hnodes, -0.5), (self.hnodes, self.inodes))
